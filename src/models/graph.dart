@@ -2,8 +2,8 @@ import 'edge.dart';
 import 'node.dart';
 
 class Graph {
-  late List nodes;
-  late List edges;
+  late List<Node> nodes;
+  late List<Edge> edges;
 
   Graph() {
     this.edges = [];
@@ -12,6 +12,26 @@ class Graph {
 
   void addNode(Node node) {
     this.nodes.add(node);
+  }
+
+  void getEdges() {
+    int index = 0;
+    for (index; index < this.edges.length; index++) {
+      if (this.edges[index].startNode.label == this.edges[index].endNode.label) {
+        print("$index = {${this.edges[index].startNode.label}, ${this.edges[index].endNode.label}} LOOP");
+      } else {
+        print("$index = {${this.edges[index].startNode.label}, ${this.edges[index].endNode.label}}");
+      }
+    }
+  }
+
+  void getNodesList() {
+    int index = 0;
+    List temp = [];
+    for (index; index < this.nodes.length; index++) {
+      temp.add(this.nodes[index].getnode);
+    }
+    print("Vertices: $temp");
   }
 
   void addEdge (double weight, Node node, Node node2) {
@@ -28,8 +48,9 @@ class Graph {
 
   Node? getNodes(Node node) {
     late Node localnode;
-    for (int index = 0; index < this.nodes.length; index++) {
-      if (this.edges[index].getnode() == node.label) {
+    int index = 0;
+    for (index; index < this.nodes.length; index++) {
+      if (this.nodes[index].label == node.label) {
         localnode = this.nodes[index];
         return localnode;
       }
