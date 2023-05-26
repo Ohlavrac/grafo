@@ -16,4 +16,7 @@ void main() {
 
   grafo.addEdge(1, node1, node2);
   grafo.addEdge(1, node1, node1);
+
+  grafo.getEdges();
+  grafo.getNodesList();
 }
