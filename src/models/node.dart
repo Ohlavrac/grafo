@@ -7,7 +7,7 @@ class Node {
 
   Node(this.label);
 
-  void get getnode => this.label;
+  String get getnode => this.label;
 
   void addInputEdge(Edge edge) {
     this.inputEdges.add(edge);
