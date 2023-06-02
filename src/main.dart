@@ -1,22 +1,22 @@
-import 'models/graph.dart';
-import 'models/node.dart';
+import 'domain/usecases/get_graphs.dart';
+import 'dart:io';
 
 void main() {
-  Graph grafo = Graph();
+  final GetGraphs getGraphs = GetGraphs();
+  final graphs = getGraphs.getGraphs();
+  String? option;
 
-  Node node1 = Node("1");
-  Node node2 = Node("2");
-  Node node3 = Node("3");
-  Node node4 = Node("4");
-
-  grafo.addNode(node1);
-  grafo.addNode(node2);
-  grafo.addNode(node3);
-  grafo.addNode(node4);
-
-  grafo.addEdge(1, node1, node2);
-  grafo.addEdge(1, node1, node1);
-
-  grafo.getEdges();
-  grafo.getNodesList();
+  while (true) {
+    print("[1] Lista de Grafos");
+    print("[0] Sair");
+    option = stdin.readLineSync();
+    
+    if (option == "0") {
+      break;
+    } else if (option == "1") {
+      print("OPA");
+    } else {
+      print("ERRO");
+    }
+  }
 }
