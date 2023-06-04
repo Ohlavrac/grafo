@@ -9,4 +9,19 @@ class LocalRepository extends Repository {
   List<Graph> getGraphs() {
     return local.getGraphs();
   }
+  
+  @override
+  Graph getGraphById(int id) {
+    return local.getGraphById(id);
+  }
+  
+  @override
+  List<Graph> getMultiGraphs() {
+    return local.getMultiGraphs();
+  }
+
+  @override
+  List<Graph> getPseudographs() {
+    return local.getPseudographs();
+  }
 }

@@ -7,4 +7,7 @@ abstract class Repository {
   Repository({required this.local});
 
   List<Graph> getGraphs();
+  Graph getGraphById(int id);
+  List<Graph> getMultiGraphs();
+  List<Graph> getPseudographs();
 }
