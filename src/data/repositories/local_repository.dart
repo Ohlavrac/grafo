@@ -24,4 +24,19 @@ class LocalRepository extends Repository {
   List<Graph> getPseudographs() {
     return local.getPseudographs();
   }
+  
+  @override
+  List<Graph> getdisconnectedGraphs() {
+    return local.getdisconnectedGraphs();
+  }
+  
+  @override
+  List<Graph> getConnectedGraphs() {
+    return local.getConnectedGraphs();
+  }
+  
+  @override
+  List<int> getVertexDegreeById(int id) {
+    return local.getVertexDegreeById(id);
+  }
 }

@@ -4,28 +4,22 @@ import 'dart:io';
 
 import 'domain/usecases/get_multigraphs.dart';
 import 'domain/usecases/get_pseudograph.dart';
+import 'domain/usecases/get_vertexdegree_by_id.dart';
+import 'ui/terminal_menu.dart';
 
 void main() {
+  final TerminalMenu menu = TerminalMenu();
+
   final GetGraphs getGraphs = GetGraphs();
   final GetGraphById getGraphById = GetGraphById();
   final GetMultiGraphs getMultiGraphs = GetMultiGraphs();
   final GetPseudoGraph getPseudoGraph = GetPseudoGraph();
+  final GetVertexDegreeById getVertexDegreeById = GetVertexDegreeById();
   final graphs = getGraphs.getGraphs();
   String? option;
 
   while (true) {
-    print("[1]    Lista de Grafos");
-    print("[2]    Multigrafos");
-    print("[3]    Pseudografos");
-    print("[4]    Desconexos");
-    print("[5]    Completos");
-    print("[6]    Graus ID=1");
-    print("[7]    Grau ID=1 Vertice=A");
-    print("[8]    Alcancaveis apartir de A");
-    print("[9]    Inalcancaveis apartir de A");
-    print("[10]   BFS");
-    print("[11]   DFS");
-    print("[ 0]    Sair");
+    menu.drawnMenu();
     option = stdin.readLineSync();
     
     if (option == "0") {
@@ -53,6 +47,15 @@ void main() {
       }
     } else if (option == "3") {
       print(getPseudoGraph.getPseudographs());
+    } else if (option == "6") {
+      for (int i = 0; i < getVertexDegreeById.getVertexDegreeById(0).length; i++) {
+        print("VERTICE [${getGraphById.getGraphById(0).nodes[i]}] GRAU ${getVertexDegreeById.getVertexDegreeById(0)[i]}");
+      }
+      print("ENTER para continuar...");
+      String? continu = stdin.readLineSync();
+      if (continu != null) {
+        continue;
+      }
     } else {
       print("ERRO");
     }

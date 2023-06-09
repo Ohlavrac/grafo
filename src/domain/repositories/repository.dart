@@ -10,4 +10,7 @@ abstract class Repository {
   Graph getGraphById(int id);
   List<Graph> getMultiGraphs();
   List<Graph> getPseudographs();
+  List<Graph> getdisconnectedGraphs();
+  List<Graph> getConnectedGraphs();
+  List<int> getVertexDegreeById(int id);
 }

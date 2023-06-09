@@ -55,4 +55,37 @@ class LocalDatasourceImpl implements LocalDatasource {
 
     return pseudographs;
   }
+  
+  @override
+  List<Graph> getdisconnectedGraphs() {
+    // TODO: implement getdisconnectedGraphs (ALGUM ALGORITMO DE BUSCA PARA VISITAR TODOS OS VERTICES APARTIR DE OUTROS DEVE DAR CONTA (BFS OU DFS))
+    // TODO: inves de implementar duas funções eu posso usar apensar uma para achar os grafos conexos e desconexos e retornar em listas diferentes.
+    throw UnimplementedError();
+  }
+  
+  @override
+  List<Graph> getConnectedGraphs() {
+    // TODO: implement getConnectedGraphs (ALGUM ALGORITMO DE BUSCA PARA VISITAR TODOS OS VERTICES APARTIR DE OUTROS DEVE DAR CONTA (BFS OU DFS))
+    throw UnimplementedError();
+  }
+  
+  @override
+  List<int> getVertexDegreeById(int id) {
+    var thegraph = graphs[id];
+    List<int> degreesOfTheVertex = [];
+    int count = 0;
+
+    for (int index = 0; index < thegraph.nodes.length; index++) {
+      for (int index2 = 0; index2 < 1; index2++) {
+        for (int index3 = 0; index3 < thegraph.edges[index2].edges.length; index3++) {
+          if (thegraph.nodes[index] == thegraph.edges[index2].edges[index3].first || thegraph.nodes[index] == thegraph.edges[index2].edges[index3].last) {
+            count++;
+          }
+        }
+      }
+      degreesOfTheVertex.add(count);
+      count = 0;
+    }
+    return degreesOfTheVertex;
+  }
 }
