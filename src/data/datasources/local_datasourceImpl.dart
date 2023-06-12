@@ -10,7 +10,7 @@ class LocalDatasourceImpl implements LocalDatasource {
   
   @override
   Graph getGraphById(int id) {
-    return graphs[id];
+    return graphs[id-1];
   }
   
   @override
@@ -50,8 +50,6 @@ class LocalDatasourceImpl implements LocalDatasource {
         }
       }
     }
-
-    //TODO: CONFIRMAR SE PRECISO TER MULTIGRAFO E UM LOOP PARA SER UM PSEUDOGRAFO
 
     return pseudographs;
   }
