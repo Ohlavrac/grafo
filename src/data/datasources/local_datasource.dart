@@ -8,4 +8,5 @@ abstract class LocalDatasource {
   List<Graph> getdisconnectedGraphs();
   List<Graph> getConnectedGraphs();
   List<int> getVertexDegreeById(int id);
+  List<int> getVertexDegreeByIdAndNode (int id, String node);
 }

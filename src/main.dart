@@ -1,3 +1,4 @@
+import 'domain/usecases/get_connected_graphs.dart';
 import 'domain/usecases/get_graph_by_id.dart';
 import 'domain/usecases/get_graphs.dart';
 import 'dart:io';
@@ -5,7 +6,9 @@ import 'dart:io';
 import 'domain/usecases/get_multigraphs.dart';
 import 'domain/usecases/get_pseudograph.dart';
 import 'domain/usecases/get_vertexdegree_by_id.dart';
+import 'domain/usecases/get_vertexdegree_by_id_and_node.dart';
 import 'ui/show_graph.dart';
+import 'ui/terminal_menu.dart';
 
 void main() {
   bool run = true;
@@ -15,13 +18,15 @@ void main() {
   final GetMultiGraphs getMultiGraphs = GetMultiGraphs();
   final GetPseudoGraph getPseudoGraph = GetPseudoGraph();
   final GetVertexDegreeById getVertexDegreeById = GetVertexDegreeById();
+  final GetConnectedGraphs getConnectedGraphs = GetConnectedGraphs();
+  final GetVertexDegreeByIdAndNode getVertexDegreeByIdAndNode = GetVertexDegreeByIdAndNode();
   final graphs = getGraphs.getGraphs();
+  final TerminalMenu menu = TerminalMenu();
   final ShowGraph showGraph = ShowGraph();
 
   String? option;
 
   while (run) {
-    //menu.drawnMenu();
     print("USE O COMANDO <help> PARA VER TODOS OS COMANDOS");
     option = stdin.readLineSync()!.replaceAll(" ", "");
 
@@ -73,6 +78,13 @@ void main() {
       case "mostrargrafosdesconexos":
         break;
       case "mostrargrafoscompletos":
+        print(getConnectedGraphs.getConnectedGraphs());
+
+        print("ENTER para continuar...");
+        String? continu = stdin.readLineSync();
+        if (continu != null) {
+          continue;
+        }
         break;
       case "grausdosvertices":
         String? graphId;
@@ -80,9 +92,34 @@ void main() {
         print("Informe o ID do grafo que deseja");
         graphId = stdin.readLineSync();
 
+        int graphIdInt = int.parse(graphId!);
+
         for (int i = 0; i < getVertexDegreeById.getVertexDegreeById(0).length; i++) {
-          print("VERTICE [${getGraphById.getGraphById(int.parse(graphId!)).nodes[i]}] GRAU ${getVertexDegreeById.getVertexDegreeById(int.parse(graphId))[i]}");
+          print("ID [${getGraphById.getGraphById(graphIdInt).id}] VERTICE [${getGraphById.getGraphById(graphIdInt-1).nodes[i]}] GRAU ${getVertexDegreeById.getVertexDegreeById(graphIdInt-1)[i]}");
         }
+
+        print("ENTER para continuar...");
+        String? continu = stdin.readLineSync();
+        if (continu != null) {
+          continue;
+        }
+        break;
+      case "graudeumno":
+        String? graphId;
+        String? node;
+
+        print("Informe o ID do grafo que deseja");
+        graphId = stdin.readLineSync();
+
+        print("Informe o No que deseja");
+        node = stdin.readLineSync()?.toUpperCase();
+
+        int graphIdInt = int.parse(graphId!);
+
+        for (int i = 0; i < getVertexDegreeByIdAndNode.getVertexDegreeByIdAndNode(0, node!).length; i++) {
+          print("ID [${getGraphById.getGraphById(graphIdInt-1).id}] VERTICE [${getGraphById.getGraphById(graphIdInt-1).nodes[i]}] GRAU ${getVertexDegreeByIdAndNode.getVertexDegreeByIdAndNode(graphIdInt-1, node!)[i]}");
+        }
+
         print("ENTER para continuar...");
         String? continu = stdin.readLineSync();
         if (continu != null) {
@@ -90,13 +127,7 @@ void main() {
         }
         break;
       case "help":
-        print("EXEMPLO DE COMANDOS");
-        print(">mostrar todos os grafos = Como o nome diz esse comando mostra todos os grafos carregados");
-        print(">mostrar multigrafos = Esse comando mostra os multigrafos da lista de grafos");
-        print(">mostrar pseudografos = Esse comando mostra todos os pseudografos da lista de grafos");
-        print(">mostrar grafos desconexos = Esse comando mostra todos os grafos desconexos da listra de grafos");
-        print(">mostrar grafos completos = Esse comando mostra todos os grafos complexto da lista de grafos");
-        print(">graus dos vertices = Esse comando é usado para mostrar o grau de todos os vertices de um grafo informado");
+        menu.drawnHelp();
         break;
       case "sair":
         run = false;

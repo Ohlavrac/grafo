@@ -16,4 +16,14 @@ class TerminalMenu {
     print("[11]   DFS");
     print("[ 0]    Sair");
   }
+
+  void drawnHelp() {
+    print("EXEMPLO DE COMANDOS");
+    print(">mostrar todos os grafos = Como o nome diz esse comando mostra todos os grafos carregados");
+    print(">mostrar multigrafos = Esse comando mostra os multigrafos da lista de grafos");
+    print(">mostrar pseudografos = Esse comando mostra todos os pseudografos da lista de grafos");
+    print(">mostrar grafos desconexos = Esse comando mostra todos os grafos desconexos da listra de grafos");
+    print(">mostrar grafos completos = Esse comando mostra todos os grafos complexto da lista de grafos");
+    print(">graus dos vertices = Esse comando é usado para mostrar o grau de todos os vertices de um grafo informado");
+  }
 }

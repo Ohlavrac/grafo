@@ -1,4 +1,5 @@
 import '../../core/graphs_json.dart';
+import '../models/edge.dart';
 import '../models/graph.dart';
 import 'local_datasource.dart';
 
@@ -10,7 +11,7 @@ class LocalDatasourceImpl implements LocalDatasource {
   
   @override
   Graph getGraphById(int id) {
-    return graphs[id-1];
+    return graphs[id];
   }
   
   @override
@@ -63,8 +64,33 @@ class LocalDatasourceImpl implements LocalDatasource {
   
   @override
   List<Graph> getConnectedGraphs() {
-    // TODO: implement getConnectedGraphs (ALGUM ALGORITMO DE BUSCA PARA VISITAR TODOS OS VERTICES APARTIR DE OUTROS DEVE DAR CONTA (BFS OU DFS))
-    throw UnimplementedError();
+    var allgraphs = graphs;
+    List visited = [];
+    List stack = [];
+    List<Graph> seila = [];
+    
+    for (int i = 0; i < allgraphs.length; i++) {
+      visited.add(allgraphs[i].nodes[0]);
+      stack.add(allgraphs[i].nodes[0]);
+
+      while (stack.isNotEmpty) {
+        var s = stack.removeLast();
+        print("$s last");
+        print(stack);
+        print(visited);
+
+        for (int i2 = 0; i2 < 1; i2++) {
+          for (int i3 = 0; i3 < allgraphs[i].edges[i2].edges.length; i3++) {
+            print(allgraphs[i].edges[i2].edges[i3]);
+            if (allgraphs[i].edges[i2].edges[i3].contains(s)) {
+              stack.add(allgraphs[i].edges[i2].edges[i3].last);
+            }
+          }
+        }
+      }
+    }
+
+    return seila;
   }
   
   @override
@@ -77,6 +103,27 @@ class LocalDatasourceImpl implements LocalDatasource {
       for (int index2 = 0; index2 < 1; index2++) {
         for (int index3 = 0; index3 < thegraph.edges[index2].edges.length; index3++) {
           if (thegraph.nodes[index] == thegraph.edges[index2].edges[index3].first || thegraph.nodes[index] == thegraph.edges[index2].edges[index3].last) {
+            count++;
+          }
+        }
+      }
+      degreesOfTheVertex.add(count);
+      count = 0;
+      
+    }
+    return degreesOfTheVertex;
+  }
+
+  @override
+  List<int> getVertexDegreeByIdAndNode (int id, String node) {
+    var thegraph = graphs[id];
+    List<int> degreesOfTheVertex = [];
+    int count = 0;
+
+    for (int index = 0; index < 1; index++) {
+      for (int index2 = 0; index2 < 1; index2++) {
+        for (int index3 = 0; index3 < thegraph.edges[index2].edges.length; index3++) {
+          if (node == thegraph.edges[index2].edges[index3].first || node == thegraph.edges[index2].edges[index3].last) {
             count++;
           }
         }
