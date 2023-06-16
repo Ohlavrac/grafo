@@ -41,7 +41,7 @@ void main() {
 
         showGraph.showGraphData(getGraphById.getGraphById(int.parse(graphId!)));
         break;
-      case "mostrartodososgrafos":
+      case "mostrargrafos":
         print("LISTA DE GRAFOS:");
         print("TOTAL DE GRAFOS [${graphs.length}]");
         for (int index = 0; index < graphs.length; index++) {
@@ -104,7 +104,7 @@ void main() {
           continue;
         }
         break;
-      case "graudeumno":
+      case "graudeumvertice":
         String? graphId;
         String? node;
 
@@ -117,7 +117,7 @@ void main() {
         int graphIdInt = int.parse(graphId!);
 
         for (int i = 0; i < getVertexDegreeByIdAndNode.getVertexDegreeByIdAndNode(0, node!).length; i++) {
-          print("ID [${getGraphById.getGraphById(graphIdInt-1).id}] VERTICE [${getGraphById.getGraphById(graphIdInt-1).nodes[i]}] GRAU ${getVertexDegreeByIdAndNode.getVertexDegreeByIdAndNode(graphIdInt-1, node!)[i]}");
+          print("ID [${getGraphById.getGraphById(graphIdInt-1).id}] VERTICE [${getGraphById.getGraphById(graphIdInt-1).nodes[i]}] GRAU ${getVertexDegreeByIdAndNode.getVertexDegreeByIdAndNode(graphIdInt-1, node)[i]}");
         }
 
         print("ENTER para continuar...");
