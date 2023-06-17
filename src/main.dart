@@ -39,7 +39,7 @@ void main() {
         print("Informe o ID do grafo que deseja");
         graphId = stdin.readLineSync();
 
-        showGraph.showGraphData(getGraphById.getGraphById(int.parse(graphId!)));
+        //showGraph.showGraphData(getGraphById.getGraphById(int.parse(graphId!)));
         break;
       case "mostrargrafos":
         print("LISTA DE GRAFOS:");
@@ -55,9 +55,7 @@ void main() {
         break;
       case "mostrarmultigrafos":
         print("LISTA COM IDS DE MULTIGRAFOS");
-        for (int i = 0; i < getMultiGraphs.getMultiGraphs().length; i++) {
-          showGraph.showGraphData(getMultiGraphs.getMultiGraphs()[i]);
-        }
+        showGraph.showGraphDataMultigraph(getMultiGraphs.getMultiGraphs());
         print("ENTER para continuar...");
         String? continu = stdin.readLineSync();
         if (continu != null) {
@@ -66,9 +64,7 @@ void main() {
         break;
       case "mostrarpseudografos":
         print("LISTA COM IDS DE PSEUDOGRAFOS");
-        for (int i = 0; i < getPseudoGraph.getPseudographs().length; i++) {
-          showGraph.showGraphData(getPseudoGraph.getPseudographs()[i]);
-        }
+        showGraph.showGraphData(getPseudoGraph.getPseudographs());
         print("ENTER para continuar...");
         String? continu = stdin.readLineSync();
         if (continu != null) {
@@ -79,6 +75,8 @@ void main() {
         break;
       case "mostrargrafoscompletos":
         print(getConnectedGraphs.getConnectedGraphs());
+
+        showGraph.showGraphData(getConnectedGraphs.getConnectedGraphs());
 
         print("ENTER para continuar...");
         String? continu = stdin.readLineSync();
