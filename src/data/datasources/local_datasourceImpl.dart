@@ -65,32 +65,17 @@ class LocalDatasourceImpl implements LocalDatasource {
   @override
   List<Graph> getConnectedGraphs() {
     var allgraphs = graphs;
-    List visited = [];
-    List stack = [];
-    List<Graph> seila = [];
-    
-    for (int i = 0; i < allgraphs.length; i++) {
-      visited.add(allgraphs[i].nodes[0]);
-      stack.add(allgraphs[i].nodes[0]);
+    List<Graph> completeGraphs = [];
 
-      while (stack.isNotEmpty) {
-        var s = stack.removeLast();
-        print("$s last");
-        print(stack);
-        print(visited);
+    for (int index = 0; index < allgraphs.length; index++) {
+      int edges_count = allgraphs[index].nodes.length * (allgraphs[index].nodes.length - 1) ~/ 2;
 
-        for (int i2 = 0; i2 < 1; i2++) {
-          for (int i3 = 0; i3 < allgraphs[i].edges[i2].edges.length; i3++) {
-            print(allgraphs[i].edges[i2].edges[i3]);
-            if (allgraphs[i].edges[i2].edges[i3].contains(s)) {
-              stack.add(allgraphs[i].edges[i2].edges[i3].last);
-            }
-          }
-        }
+      if (allgraphs[index].edges.length == edges_count) {
+        completeGraphs.add(allgraphs[index]);
       }
     }
 
-    return seila;
+    return completeGraphs;
   }
   
   @override
