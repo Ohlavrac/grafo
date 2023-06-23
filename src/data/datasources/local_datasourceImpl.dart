@@ -122,12 +122,9 @@ class LocalDatasourceImpl implements LocalDatasource {
   @override
   List<String> getReachableVertices(int id, String node) {
     var thegraph = graphs[id];
-    List<String> thegraphNodes = List<String>.from(thegraph.nodes);
-    thegraphNodes.remove(node);
     List<String> queue = [];
     queue.add(node);
     List<String> reachableVertices = [];
-    List<String> unreachableVertices = [];
 
     while (queue.isNotEmpty) {
       String local_vertex = queue.removeAt(0);
@@ -146,6 +143,17 @@ class LocalDatasourceImpl implements LocalDatasource {
       }
     }
 
+    return reachableVertices;
+  }
+  
+  @override
+  List<String> getUnreachableVertices(int id, String node) {
+    var thegraph = graphs[id];
+    List<String> thegraphNodes = List<String>.from(thegraph.nodes);
+    thegraphNodes.remove(node);
+    List<String> reachableVertices = getReachableVertices(id, node);
+    List<String> unreachableVertices = [];
+
     for (int index4 = 0; index4 < reachableVertices.length; index4++) {
       if (reachableVertices[index4] == thegraphNodes[index4]) {
         continue;
@@ -154,8 +162,6 @@ class LocalDatasourceImpl implements LocalDatasource {
       }
     }
 
-    print(unreachableVertices);
-
-    return reachableVertices;
+    return unreachableVertices;
   }
 }

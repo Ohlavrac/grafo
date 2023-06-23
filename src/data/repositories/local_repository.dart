@@ -49,4 +49,9 @@ class LocalRepository extends Repository {
   List<String> getReachableVertices(int id, String node) {
     return local.getReachableVertices(id, node);
   }
+  
+  @override
+  List<String> getUnreachableVertices(int id, String node) {
+    return local.getUnreachableVertices(id, node);
+  }
 }
