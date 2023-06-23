@@ -6,6 +6,7 @@ import 'dart:io';
 import 'domain/usecases/get_multigraphs.dart';
 import 'domain/usecases/get_pseudograph.dart';
 import 'domain/usecases/get_reachable_vertices.dart';
+import 'domain/usecases/get_unreachable_vertices.dart';
 import 'domain/usecases/get_vertexdegree_by_id.dart';
 import 'domain/usecases/get_vertexdegree_by_id_and_node.dart';
 import 'ui/show_graph.dart';
@@ -22,6 +23,7 @@ void main() {
   final GetConnectedGraphs getConnectedGraphs = GetConnectedGraphs();
   final GetVertexDegreeByIdAndNode getVertexDegreeByIdAndNode = GetVertexDegreeByIdAndNode();
   final GetReachableVertices getReachableVertices = GetReachableVertices();
+  final GetUnReachableVertices getUnReachableVertices = GetUnReachableVertices();
 
   final graphs = getGraphs.getGraphs();
   final TerminalMenu menu = TerminalMenu();
@@ -139,6 +141,25 @@ void main() {
         node = stdin.readLineSync()?.toUpperCase();
 
         print(getReachableVertices.getReachableVertices(graphIdInt-1, node!));
+
+        print("ENTER para continuar...");
+        String? continu = stdin.readLineSync();
+        if (continu != null) {
+          continue;
+        }
+        break;
+      case "verticesinalcancaveisapartir":
+        String? graphId;
+        String? node;
+
+        print("Informe o ID do grafo que deseja");
+        graphId = stdin.readLineSync();
+        int graphIdInt = int.parse(graphId!);
+
+        print("Informe o No que deseja entre ${getGraphById.getGraphById(graphIdInt-1).nodes}");
+        node = stdin.readLineSync()?.toUpperCase();
+
+        print(getUnReachableVertices.getUnreachableVertices(graphIdInt, node!));
 
         print("ENTER para continuar...");
         String? continu = stdin.readLineSync();
