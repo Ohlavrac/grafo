@@ -3,6 +3,11 @@ Implementado Grafo em Dart
 
 ## Instalação
 PS: Instalador em contrução
+PS2: Funcionando apenas em Linux
+
+Pre-Requisitos:
+- Acesso Sudo
+- Dart
 
 Execute os comandos abaixo dentro da pasta /grafos/src
 
