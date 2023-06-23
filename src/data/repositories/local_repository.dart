@@ -44,4 +44,9 @@ class LocalRepository extends Repository {
   List<int> getVertexDegreeByIdAndNode(int id, String node) {
     return local.getVertexDegreeByIdAndNode(id, node);
   }
+  
+  @override
+  List<String> getReachableVertices(int id, String node) {
+    return local.getReachableVertices(id, node);
+  }
 }

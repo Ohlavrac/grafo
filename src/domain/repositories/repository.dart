@@ -14,4 +14,5 @@ abstract class Repository {
   List<Graph> getConnectedGraphs();
   List<int> getVertexDegreeById(int id);
   List<int> getVertexDegreeByIdAndNode (int id, String node);
+  List<String> getReachableVertices (int id, String node);
 }

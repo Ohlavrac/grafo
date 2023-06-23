@@ -118,4 +118,44 @@ class LocalDatasourceImpl implements LocalDatasource {
     }
     return degreesOfTheVertex;
   }
+  
+  @override
+  List<String> getReachableVertices(int id, String node) {
+    var thegraph = graphs[id];
+    List<String> thegraphNodes = List<String>.from(thegraph.nodes);
+    thegraphNodes.remove(node);
+    List<String> queue = [];
+    queue.add(node);
+    List<String> reachableVertices = [];
+    List<String> unreachableVertices = [];
+
+    while (queue.isNotEmpty) {
+      String local_vertex = queue.removeAt(0);
+      for (int index = 0; index < 1; index++) {
+        for (int index2 = 0; index2 < 1; index2++) {
+          for (int index3 = 0; index3 < thegraph.edges[index2].edges.length; index3++) {
+            if (thegraph.edges[index2].edges[index3].first == local_vertex && reachableVertices.contains(thegraph.edges[index2].edges[index3].last) == false) {
+              reachableVertices.add(thegraph.edges[index2].edges[index3].last);
+              queue.remove(thegraph.edges[index2].edges[index3].last);
+            } else if (thegraph.edges[index2].edges[index3].last == local_vertex && reachableVertices.contains(thegraph.edges[index2].edges[index3].first) == false) {
+              reachableVertices.add(thegraph.edges[index2].edges[index3].first);
+              queue.remove(thegraph.edges[index2].edges[index3].first);
+            }
+          }
+        }
+      }
+    }
+
+    for (int index4 = 0; index4 < reachableVertices.length; index4++) {
+      if (reachableVertices[index4] == thegraphNodes[index4]) {
+        continue;
+      } else {
+        unreachableVertices.add(thegraphNodes[index4]);
+      }
+    }
+
+    print(unreachableVertices);
+
+    return reachableVertices;
+  }
 }
