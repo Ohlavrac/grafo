@@ -56,9 +56,43 @@ class LocalDatasourceImpl implements LocalDatasource {
   
   @override
   List<Graph> getdisconnectedGraphs() {
-    // TODO: implement getdisconnectedGraphs (ALGUM ALGORITMO DE BUSCA PARA VISITAR TODOS OS VERTICES APARTIR DE OUTROS DEVE DAR CONTA (BFS OU DFS))
-    // TODO: inves de implementar duas funções eu posso usar apensar uma para achar os grafos conexos e desconexos e retornar em listas diferentes.
-    throw UnimplementedError();
+    var allgraphs = graphs;
+    List<Graph> disconnectedGraphs = [];
+    List<String> queue = [];
+    List<String> reachableVertices = [];
+    
+    for(int index = 0; index < allgraphs.length; index++) {
+      List<String> vertex = allgraphs[index].nodes;
+      queue.add(vertex[0]);
+      while (queue.isNotEmpty) {
+        String localVertex = queue.removeAt(0);
+        reachableVertices.add(localVertex);
+
+        for (int c = 0; c < 1; c++) {
+          for (int x = 0; x < allgraphs[index].edges[c].edges.length; x++) {
+            if (allgraphs[index].edges[c].edges[x].first == localVertex && reachableVertices.contains(allgraphs[index].edges[c].edges[x].last) == false) {
+              reachableVertices.add(allgraphs[index].edges[c].edges[x].last);
+              queue.add(allgraphs[index].edges[c].edges[x].last);
+            } else if (allgraphs[index].edges[c].edges[x].last == localVertex && reachableVertices.contains(allgraphs[index].edges[c].edges[x].first) == false) {
+              reachableVertices.add(allgraphs[index].edges[c].edges[x].first);
+              queue.add(allgraphs[index].edges[c].edges[x].first);
+            }
+          }
+        }
+        
+        if (vertex.length == reachableVertices.length) {
+          continue;
+        } else {
+          disconnectedGraphs.add(allgraphs[index]);
+        }
+
+        queue.clear();
+        reachableVertices.clear();
+        //vertex.clear();
+      }
+    }
+
+    return disconnectedGraphs;
   }
   
   @override
@@ -67,9 +101,9 @@ class LocalDatasourceImpl implements LocalDatasource {
     List<Graph> completeGraphs = [];
 
     for (int index = 0; index < allgraphs.length; index++) {
-      int edges_count = allgraphs[index].nodes.length * (allgraphs[index].nodes.length - 1) ~/ 2;
+      int edges_count = (allgraphs[index].nodes.length * (allgraphs[index].nodes.length - 1)) ~/ 2;
 
-      if (allgraphs[index].edges.length == edges_count) {
+      if (allgraphs[index].edges[1].edges.length == edges_count) {
         completeGraphs.add(allgraphs[index]);
       }
     }
@@ -153,11 +187,11 @@ class LocalDatasourceImpl implements LocalDatasource {
     List<String> reachableVertices = getReachableVertices(id, node);
     List<String> unreachableVertices = [];
 
-    for (int index4 = 0; index4 < reachableVertices.length; index4++) {
-      if (reachableVertices[index4] == thegraphNodes[index4]) {
+    for (int index = 0; index < reachableVertices.length; index++) {
+      if (reachableVertices[index] == thegraphNodes[index]) {
         continue;
       } else {
-        unreachableVertices.add(thegraphNodes[index4]);
+        unreachableVertices.add(thegraphNodes[index]);
       }
     }
 

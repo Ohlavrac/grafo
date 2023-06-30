@@ -1,4 +1,5 @@
 import 'domain/usecases/get_connected_graphs.dart';
+import 'domain/usecases/get_disconnected_graphs.dart';
 import 'domain/usecases/get_graph_by_id.dart';
 import 'domain/usecases/get_graphs.dart';
 import 'dart:io';
@@ -24,6 +25,7 @@ void main() {
   final GetVertexDegreeByIdAndNode getVertexDegreeByIdAndNode = GetVertexDegreeByIdAndNode();
   final GetReachableVertices getReachableVertices = GetReachableVertices();
   final GetUnReachableVertices getUnReachableVertices = GetUnReachableVertices();
+  final GetDisconnectedGraphs getDisconnectedGraphs = GetDisconnectedGraphs();
 
   final graphs = getGraphs.getGraphs();
   final TerminalMenu menu = TerminalMenu();
@@ -77,10 +79,15 @@ void main() {
         }
         break;
       case "mostrargrafosdesconexos":
+        showGraph.showGraphData(getDisconnectedGraphs.getDisconnectedGraphs());
+
+        print("ENTER para continuar...");
+        String? continu = stdin.readLineSync();
+        if (continu != null) {
+          continue;
+        }
         break;
       case "mostrargrafoscompletos":
-        print(getConnectedGraphs.getConnectedGraphs());
-
         showGraph.showGraphData(getConnectedGraphs.getConnectedGraphs());
 
         print("ENTER para continuar...");
