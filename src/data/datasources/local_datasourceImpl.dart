@@ -3,6 +3,20 @@ import '../models/graph.dart';
 import 'local_datasource.dart';
 
 class LocalDatasourceImpl implements LocalDatasource {
+  List<List<String>> getEdges(int id) {
+    var thegraph = graphs[id];
+    List<List<String>> edges = [];
+    for (int index = 0; index < 1; index++) {
+      for (int index2 = 0; index2 < 1; index2++) {
+        for (int index3 = 0; index3 < thegraph.edges[index2].edges.length; index3++) {
+            edges.add(thegraph.edges[index2].edges[index3]);
+          }
+      }
+    }
+
+    return edges;
+  }
+
   @override
   List<Graph> getGraphs() {
     return graphs;
@@ -56,40 +70,35 @@ class LocalDatasourceImpl implements LocalDatasource {
   
   @override
   List<Graph> getdisconnectedGraphs() {
-    var allgraphs = graphs;
     List<Graph> disconnectedGraphs = [];
-    List<String> queue = [];
-    List<String> reachableVertices = [];
-    
-    for(int index = 0; index < allgraphs.length; index++) {
-      List<String> vertex = allgraphs[index].nodes;
-      queue.add(vertex[0]);
-      while (queue.isNotEmpty) {
-        String localVertex = queue.removeAt(0);
-        reachableVertices.add(localVertex);
+    List<List<String>> adj = [];
 
-        for (int c = 0; c < 1; c++) {
-          for (int x = 0; x < allgraphs[index].edges[c].edges.length; x++) {
-            if (allgraphs[index].edges[c].edges[x].first == localVertex && reachableVertices.contains(allgraphs[index].edges[c].edges[x].last) == false) {
-              reachableVertices.add(allgraphs[index].edges[c].edges[x].last);
-              queue.add(allgraphs[index].edges[c].edges[x].last);
-            } else if (allgraphs[index].edges[c].edges[x].last == localVertex && reachableVertices.contains(allgraphs[index].edges[c].edges[x].first) == false) {
-              reachableVertices.add(allgraphs[index].edges[c].edges[x].first);
-              queue.add(allgraphs[index].edges[c].edges[x].first);
+    for (int z = 0; z < graphs.length; z++) {
+      var thegraph = graphs[z];
+      List<List<String>> edges = getEdges(z);
+      int maxVertex = thegraph.nodes.length;
+      List<String> nodes = thegraph.nodes;
+      
+      for (int c = 0; c < maxVertex; c++) {
+        adj.add([]);
+      }
+
+      for (int i = 0; i < nodes.length; i++) {
+        for (int x = 0; x < maxVertex; x++) {
+          if (edges[x].contains(nodes[i])) {
+            if (edges[x].first != nodes[i]) {
+              adj[i].add(edges[x].first);
+            } else if (edges[x].last != nodes) {
+              adj[i].add(edges[x].last);
             }
           }
         }
-        
-        if (vertex.length == reachableVertices.length) {
-          continue;
-        } else {
-          disconnectedGraphs.add(allgraphs[index]);
-        }
-
-        queue.clear();
-        reachableVertices.clear();
-        //vertex.clear();
       }
+
+      print(adj);
+      edges.clear();
+      nodes.clear();
+      adj.clear();
     }
 
     return disconnectedGraphs;
