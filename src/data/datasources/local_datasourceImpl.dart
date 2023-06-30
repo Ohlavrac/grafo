@@ -1,5 +1,4 @@
 import '../../core/graphs_json.dart';
-import '../models/edge.dart';
 import '../models/graph.dart';
 import 'local_datasource.dart';
 
