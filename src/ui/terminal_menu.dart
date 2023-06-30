@@ -18,13 +18,15 @@ class TerminalMenu {
   }
 
   void drawnHelp() {
-    print("EXEMPLO DE COMANDOS");
-    print(">mostrargrafos= Como o nome diz esse comando mostra todos os grafos carregados");
-    print(">mostrarmultigrafos = Esse comando mostra os multigrafos da lista de grafos");
-    print(">mostrarpseudografos = Esse comando mostra todos os pseudografos da lista de grafos");
-    print(">mostrargrafosdesconexos = Esse comando mostra todos os grafos desconexos da listra de grafos");
-    print(">mostrargrafoscompletos = Esse comando mostra todos os grafos complexto da lista de grafos");
-    print(">grausdosvertices = Esse comando é usado para mostrar o grau de todos os vertices de um grafo informado");
-    print(">graudeumvertice = Esse comando é usado para mostrar o grau de um vertice de um grafo informado");
+    print("COMANDOS");
+    print("grafosajuda");
+    print("grafosmultigrafos");
+    print("grafospseudografos");
+    print("grafosverticesalcancaveis");
+    print("grafosverticesinalcancaveis");
+    print("grafosgraus");
+    print("grafosgrauvertice");
+    print("grafoscompletos");
+    print("grafostodos");
   }
 }

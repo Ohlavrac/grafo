@@ -4,7 +4,6 @@ import '../ui/terminal_menu.dart';
 void main() {
   final GetGraphs getGraphs = GetGraphs();
   final graphs = getGraphs.getGraphs();
-  final TerminalMenu menu = TerminalMenu();
 
   print("LISTA DE GRAFOS:");
         print("TOTAL DE GRAFOS [${graphs.length}]");

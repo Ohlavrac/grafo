@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import '../core/graphs_json.dart';
 import '../domain/usecases/get_graph_by_id.dart';
 import '../domain/usecases/get_unreachable_vertices.dart';
 
@@ -14,8 +15,12 @@ void main() {
   graphId = stdin.readLineSync();
   int graphIdInt = int.parse(graphId!);
 
-  print("Informe o No que deseja entre ${getGraphById.getGraphById(graphIdInt-1).nodes}");
-  node = stdin.readLineSync()?.toUpperCase();
+  if (graphIdInt < 1 || graphIdInt > graphs.length) {
+    print("GRAFO NÂO ENCONTRADO");
+  } else {
+    print("Informe o No que deseja entre ${getGraphById.getGraphById(graphIdInt-1).nodes}");
+    node = stdin.readLineSync()?.toUpperCase();
 
-  print(getUnReachableVertices.getUnreachableVertices(graphIdInt, node!));
+    print(getUnReachableVertices.getUnreachableVertices(graphIdInt-1, node!));
+  }
 }
